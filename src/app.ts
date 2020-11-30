@@ -6,15 +6,17 @@ import * as user from './controllers/user'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import { auth, aba } from './middleware/Auth'
+import cors from 'cors'
 
 dotenv.config();
 
 connectDB()
 
 const app = express();
-app.set("port", 3000)
+app.set("port", (<any>process).env.PORT || 3000)
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.get('/', (req: any, res: any) => {
     res.send('Helloworld')
